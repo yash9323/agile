@@ -93,7 +93,7 @@ function checknotauthenticated(req, res, next) {
     next()
 }
 
-app.listen(3300)
+app.listen(6969)
 
 
 // app.get('/newproject',checkauthenticated,(req,res)=>{
