@@ -66,7 +66,7 @@ app.post('/register', checknotauthenticated, async (req, res) => {
     }
 })
 
-app.get('/projects', checkauthenticated, async (req, res) => {
+app.get('/projects', checkauthenticated, (req, res) => {
     res.json(projectslist)
   });
 

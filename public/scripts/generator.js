@@ -1,6 +1,7 @@
-fetch('http://localhost:3300/projects')
+fetch('http://localhost:6969/projects')
 .then((response) => response.json())
 .then((data) => {
+    console.log(data)
     const projectContainer = document.getElementById("project-container")
     for (let project of data){
         const projectDiv = document.createElement("div");
