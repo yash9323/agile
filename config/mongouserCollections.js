@@ -13,4 +13,4 @@ const getCollectionFn = (collection) => {
   };
 };
 
-export default getCollectionFn('projects');
+export default getCollectionFn('users');

@@ -1,5 +1,5 @@
-const localstratergy = require('passport-local').Strategy
-const bcrypt = require('bcrypt')
+import { Strategy as LocalStrategy } from 'passport-local';
+import bcrypt from 'bcrypt';
 
 function initialize(passport,getuserbyemail,getuserbyid){
     const  authenticateuser = async (email,password,done) => {
@@ -18,7 +18,7 @@ function initialize(passport,getuserbyemail,getuserbyid){
             return done(e)
         }
     }
-    passport.use(new localstratergy({usernameField:'email'},
+    passport.use(new LocalStrategy({usernameField:'email'},
     authenticateuser))
     passport.serializeUser((user,done)=> done(null,user.id))
     passport.deserializeUser((id,done)=>{
@@ -26,4 +26,4 @@ function initialize(passport,getuserbyemail,getuserbyid){
     })
 }
 
-module.exports = initialize
+export default initialize
