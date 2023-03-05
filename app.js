@@ -8,8 +8,10 @@ import session from 'express-session';
 import methodoverride from 'method-override';
 import initializepassport from './passport_config.js';
 import users from './data_handler/users.js';
-import projectslist from './data_handler/projects.js'
+import projectsgetter from './data_handler/projects.js'
 import get_project from './data_handler/get_p.js';
+import create_project from './data_handler/create_p.js';
+import delete_project from './data_handler/delete_p.js';
 
 dotenv.config();
 const app = express();
@@ -67,7 +69,8 @@ app.post('/register', checknotauthenticated, async (req, res) => {
     }
 })
 
-app.get('/projects', checkauthenticated, (req, res) => {
+app.get('/projects', checkauthenticated, async (req, res) => {
+    let projectslist = await projectsgetter()
     res.json(projectslist)
   });
 
@@ -81,10 +84,24 @@ app.delete('/logout', (req, res) => {
     res.redirect('/login')
 })
 
-
 app.post('/getproject',checkauthenticated,async (req,res)=>{
     let d = await get_project(req.body.id)
     res.render('view_project.ejs',d)
+})
+
+app.get("/newproject",checkauthenticated,(req,res)=>{
+    res.render("new_project.ejs")
+})
+
+app.post('/createproject',checkauthenticated,async (req,res)=>{
+    console.log(req.body)
+    let success = await create_project(req.body)
+    res.redirect(301,"/") // unable to redirect and reload page please check
+})
+
+app.post('/deleteproject',checkauthenticated,async (req,res)=>{
+    let s = await delete_project(req.body.id)
+    res.redirect("/")
 })
 
 function checkauthenticated(req, res, next) {
@@ -101,11 +118,6 @@ function checknotauthenticated(req, res, next) {
 }
 
 app.listen(6969)
-
-
-// app.get('/newproject',checkauthenticated,(req,res)=>{
-//     res.render('new_project.ejs')
-// })
 
 // app.post('/createproject',checkauthenticated,async (req,res)=>{
 //     const db = await dbConnection();
