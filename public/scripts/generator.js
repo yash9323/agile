@@ -4,6 +4,7 @@ fetch('http://localhost:6969/projects')
     console.log(data)
     const projectContainer = document.getElementById("project-container")
     for (let project of data){
+        console.log(project._id)
         const projectDiv = document.createElement("div");
         projectDiv.className = "project"
         projectDiv.innerHTML =
@@ -16,7 +17,10 @@ fetch('http://localhost:6969/projects')
           </div>
           <div>
             <h2>Status: ${project.status}</h2>
-            <button type="button">Contact</button>
+            <form action="/getproject" method="POST">
+            <input type="hidden" name="id" value=${project._id}>
+            <button type="submit" id="view-button">View</button>
+            </form>
           </div>
           `;
         projectContainer.appendChild(projectDiv);

@@ -9,6 +9,7 @@ import methodoverride from 'method-override';
 import initializepassport from './passport_config.js';
 import users from './data_handler/users.js';
 import projectslist from './data_handler/projects.js'
+import get_project from './data_handler/get_p.js';
 
 dotenv.config();
 const app = express();
@@ -78,6 +79,12 @@ app.delete('/logout', (req, res) => {
             }
         })
     res.redirect('/login')
+})
+
+
+app.post('/getproject',checkauthenticated,async (req,res)=>{
+    let d = await get_project(req.body.id)
+    res.render('view_project.ejs',d)
 })
 
 function checkauthenticated(req, res, next) {
