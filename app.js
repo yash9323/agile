@@ -8,6 +8,7 @@ import session from 'express-session';
 import methodoverride from 'method-override';
 import initializepassport from './passport_config.js';
 import users from './data_handler/users.js';
+import add_user from './data_handler/create_user.js';
 import projectsgetter from './data_handler/projects.js'
 import get_project from './data_handler/get_p.js';
 import create_project from './data_handler/create_p.js';
@@ -55,12 +56,14 @@ app.get('/register', checknotauthenticated, (req, res) => {
 app.post('/register', checknotauthenticated, async (req, res) => {
     try {
         const hasedpassword = await bcrypt.hash(req.body.password, 10)
-        users.push({
+        const user_obj={
             id: Math.random() * 100,
             name: req.body.name,
             email: req.body.email,
-            password: hasedpassword
-        })
+            password: hasedpassword,
+            type: req.body.user_type
+        };
+        await add_user(user_obj);
         res.redirect("/login")
     }
     catch {
