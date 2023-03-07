@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="css/new_project.css">
+<script type="module" src="scripts/fetch_cust.js" defer></script>
 <body class="body">
     <div class="flexing">
         <div class="headers">
@@ -23,14 +24,11 @@
                     <input type="text" id="description" name="description" placeholder="Your description" required>
                 </div>
                 <div style="width: 80%; padding: 20px;">
-                    <label for="customer">For customer</label><br>
+                    <label for="customer">Customer</label><br>
                     <br style="content: ' '; margin: 2em;display: block;font-size: 24%;">
-                    <input type="text" id="customer" name="customer" placeholder="Your customer" required>
-                </div>
-                <div style="width: 80%; padding: 20px;">
-                    <label for="address">Customer Address</label><br>
-                    <br style="content: ' '; margin: 2em;display: block;font-size: 24%;">
-                    <input type="text" id="address" name="address" placeholder="Your address" required>
+                    <select name="customer" id="customer-dropdown">
+                        <option value="none" selected disabled hidden>Select a customer</option>
+                    </select>
                 </div>
                 <div style="width: 80%; padding: 20px;">
                     <label for="status">Status</label><br>

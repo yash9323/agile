@@ -1,6 +1,7 @@
 name :<%= name %>
 status : <%= status %>
 id : <%= _id %>
+customer: <%= customerName %>
 <form action="/deleteproject" method="POST">
     <input type="hidden" name="id" value=<%=_id%>>
     <button type="submit">delete</button>

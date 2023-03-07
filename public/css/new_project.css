@@ -61,3 +61,6 @@
     font-size: 20px;
     border-color: white;
 }
+.projectbox select{
+    width: 100%;
+}

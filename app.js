@@ -77,6 +77,11 @@ app.get('/projects', checkauthenticated, async (req, res) => {
     res.json(projectslist)
   });
 
+app.get('/customers', checkauthenticated, async(req, res) => {
+    let customerList = users.filter(user => user.type === 'customer');
+    res.json(customerList);
+})
+
 app.delete('/logout', (req, res) => {
     req.logOut(
         function (err) {
@@ -89,6 +94,8 @@ app.delete('/logout', (req, res) => {
 
 app.post('/getproject',checkauthenticated,async (req,res)=>{
     let d = await get_project(req.body.id)
+    const user = users.find(user => user._id.toString() === d.customer)
+    d.customerName = user.name;
     res.render('view_project.ejs',d)
 })
 
@@ -99,7 +106,7 @@ app.get("/newproject",checkauthenticated,(req,res)=>{
 app.post('/createproject',checkauthenticated,async (req,res)=>{
     console.log(req.body)
     let success = await create_project(req.body)
-    res.redirect(301,"/") // unable to redirect and reload page please check
+    res.redirect("/");
 })
 
 app.post('/deleteproject',checkauthenticated,async (req,res)=>{
@@ -121,18 +128,3 @@ function checknotauthenticated(req, res, next) {
 }
 
 app.listen(6969)
-
-// app.post('/createproject',checkauthenticated,async (req,res)=>{
-//     const db = await dbConnection();
-//     const projectcollection = await projects();
-//     const ob = {
-//         name:req.body.name,
-//         customer:req.body.customer,
-//         description:req.body.description,
-//         address:req.body.address,
-//         status:req.body.status
-//     }
-//     projects.push(ob)
-//     console.log(projects)
-//     res.redirect('/')
-// })
