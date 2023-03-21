@@ -1,0 +1,22 @@
+.body {
+    background: linear-gradient(#000000, #1d246e);
+    color: white;
+}
+.bruh{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.bruh h1{
+    margin-left: 20px;
+    font-weight: bolder;
+}
+.bruh h2{
+    margin-left: 20px;
+    font-size: 26px;
+}
+.bruh button{
+    margin-left: 40px;
+    width: 50px;
+    height: 25px;
+}

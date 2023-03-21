@@ -1,8 +1,32 @@
-name :<%= name %>
-status : <%= status %>
-id : <%= _id %>
-customer: <%= customerName %>
+<link rel="stylesheet" href="css/view_project.css">
+<script src="scripts/vp.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<body class="body">
+    <center><h1>Solar Project</h1></center>
+<div class="bruh">
+    <h1>Project Name :</h1>
+    <h2><%= name %></h2>
+    <button type="button" onclick="displayname()">Edit</button>
+    <input type="text" style="display:none; margin-left: 20px; width: 200px;" class="namechanger" placeholder="enter new name here">
+    <button type="button" onclick="changename()" style="display:none; margin-left: 20px; width: 70px;" id="namer">update</button>
+</div>
+<div class="bruh">
+    <h1>Project Status :</h1>
+    <h2><%= status %></h2>
+    <button type="button" onclick="displaystatus()">Edit</button>
+    <input type="text" style="display:none; margin-left: 20px; width: 200px;" class="statuschanger" placeholder="enter new status here">
+    <button type="button" onclick="changestatus()" style="display:none; margin-left: 20px; width: 70px;" id="statuser">update</button>
+</div>
+<div class="bruh">
+    <h1>customer id :</h1>
+    <h2><%= _id %></h2>
+</div>
+<div class="bruh">
+    <h1>Customer Name :</h1>
+    <h2><%= customerName %></h2>
+</div>
 <form action="/deleteproject" method="POST">
     <input type="hidden" name="id" value=<%=_id%>>
     <button type="submit">delete</button>
 </form>
+</body>
