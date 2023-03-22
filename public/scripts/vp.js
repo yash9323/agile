@@ -23,18 +23,4 @@ function displaystatus(){
     }
 }
 
-function changename(){
-    const lol = document.getElementsByClassName("namechanger")[0]
-    if (lol.value === ""){
-        alert("please enter a name")
-    }
-}
-
-function changestatus(){
-    const lol = document.getElementsByClassName("statuschanger")[0]
-    if (lol.value === ""){
-        alert("please enter a status")
-    }
-}
-
 

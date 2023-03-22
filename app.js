@@ -13,6 +13,8 @@ import projectsgetter from './data_handler/projects.js'
 import get_project from './data_handler/get_p.js';
 import create_project from './data_handler/create_p.js';
 import delete_project from './data_handler/delete_p.js';
+import namechange from './data_handler/changen_p.js';
+import statuschange from './data_handler/changes_p.js';
 
 dotenv.config();
 const app = express();
@@ -35,11 +37,11 @@ initializepassport(
     id => users.find(user => user.id === id)
 )
 
-app.get('/',checkauthenticated,(req,res)=>{
-    res.render('index.ejs',{name: req.user.name})
+app.get('/', checkauthenticated, (req, res) => {
+    res.render('index.ejs', { name: req.user.name })
 })
 
-app.get('/login',checknotauthenticated,(req,res)=>{
+app.get('/login', checknotauthenticated, (req, res) => {
     res.render('login_sales.ejs')
 })
 
@@ -56,7 +58,7 @@ app.get('/register', checknotauthenticated, (req, res) => {
 app.post('/register', checknotauthenticated, async (req, res) => {
     try {
         const hasedpassword = await bcrypt.hash(req.body.password, 10)
-        const user_obj={
+        const user_obj = {
             id: Math.random() * 100,
             name: req.body.name,
             email: req.body.email,
@@ -75,9 +77,9 @@ app.post('/register', checknotauthenticated, async (req, res) => {
 app.get('/projects', checkauthenticated, async (req, res) => {
     let projectslist = await projectsgetter()
     res.json(projectslist)
-  });
+});
 
-app.get('/customers', checkauthenticated, async(req, res) => {
+app.get('/customers', checkauthenticated, async (req, res) => {
     let customerList = users.filter(user => user.type === 'customer');
     res.json(customerList);
 })
@@ -92,26 +94,41 @@ app.delete('/logout', (req, res) => {
     res.redirect('/login')
 })
 
-app.post('/getproject',checkauthenticated,async (req,res)=>{
+app.post('/getproject', checkauthenticated, async (req, res) => {
     let d = await get_project(req.body.id)
     const user = users.find(user => user._id.toString() === d.customer)
     d.customerName = user.name;
-    res.render('view_project.ejs',d)
+    d.customerEmail = user.email
+    res.render('view_project.ejs', d)
 })
 
-app.get("/newproject",checkauthenticated,(req,res)=>{
+app.get("/newproject", checkauthenticated, (req, res) => {
     res.render("new_project.ejs")
 })
 
-app.post('/createproject',checkauthenticated,async (req,res)=>{
+app.post('/createproject', checkauthenticated, async (req, res) => {
     console.log(req.body)
     let success = await create_project(req.body)
     res.redirect("/");
 })
 
-app.post('/deleteproject',checkauthenticated,async (req,res)=>{
+app.post('/deleteproject', checkauthenticated, async (req, res) => {
     let s = await delete_project(req.body.id)
     res.redirect("/")
+})
+
+app.post('/pnamechange', checkauthenticated, async (req, res) => {
+    let a = await namechange(req.body.id,req.body.name)
+    if (a !== null){
+        res.redirect("/")
+    }
+})
+
+app.post('/pstatuschange', checkauthenticated, async (req, res) => {
+    let a = await statuschange(req.body.id,req.body.status)
+    if (a !== null){
+        res.redirect("/")
+    }
 })
 
 function checkauthenticated(req, res, next) {
