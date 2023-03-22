@@ -24,6 +24,16 @@
     </form>
 </div>
 <div class="bruh">
+    <h1>Project Notes :</h1>
+    <h2><%= description %></h2>
+    <button type="button" onclick="displaydescription()">Edit</button>
+    <form action="/pdescriptionchange" method="POST">
+        <input type="hidden" name="id" value=<%=_id%>>
+        <input name="description" type="text" style="display:none; margin-left: 20px; width: 200px;" class="desc" placeholder="enter new description here" required>
+        <button type="submit" style="display:none; margin-left: 20px; width: 70px;" id="descriptionr">Update</button>
+    </form>
+</div>
+<div class="bruh">
     <h1>Project id :</h1>
     <h2><%= _id %></h2>
 </div>

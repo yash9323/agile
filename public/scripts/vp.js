@@ -22,5 +22,17 @@ function displaystatus(){
         n.style.display = "none"
     }
 }
+function displaydescription(){
+    const lol = document.getElementsByClassName("desc")[0]
+    const n = document.getElementById("descriptionr")
+    if (lol.style.display === "none"){
+        lol.style.display = ""
+        n.style.display = ""
+    }
+    else{
+        lol.style.display = "none"
+        n.style.display = "none"
+    }
+}
 
 

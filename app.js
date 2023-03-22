@@ -15,6 +15,7 @@ import create_project from './data_handler/create_p.js';
 import delete_project from './data_handler/delete_p.js';
 import namechange from './data_handler/changen_p.js';
 import statuschange from './data_handler/changes_p.js';
+import descriptionchange from './data_handler/changed_p.js';
 
 dotenv.config();
 const app = express();
@@ -126,6 +127,13 @@ app.post('/pnamechange', checkauthenticated, async (req, res) => {
 
 app.post('/pstatuschange', checkauthenticated, async (req, res) => {
     let a = await statuschange(req.body.id,req.body.status)
+    if (a !== null){
+        res.redirect("/")
+    }
+})
+
+app.post('/pdescriptionchange', checkauthenticated, async (req, res) => {
+    let a = await descriptionchange(req.body.id,req.body.description)
     if (a !== null){
         res.redirect("/")
     }
