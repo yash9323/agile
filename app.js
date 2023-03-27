@@ -39,14 +39,14 @@ initializepassport(
 )
 
 app.get('/', checkauthenticated, (req, res) => {
-    res.render('index.ejs', { name: req.user.name })
+    res.render('salesindex.ejs', { name: req.user.name })
 })
 
-app.get('/login', checknotauthenticated, (req, res) => {
+app.get('/saleslogin', checknotauthenticated, (req, res) => {
     res.render('login_sales.ejs')
 })
 
-app.post('/login', checknotauthenticated, passport.authenticate('local', {
+app.post('/saleslogin', checknotauthenticated,passport.authenticate('sales',{
     successRedirect: '/',
     failureRedirect: '/login',
     failureFlash: true
@@ -86,13 +86,23 @@ app.get('/customers', checkauthenticated, async (req, res) => {
 })
 
 app.delete('/logout', (req, res) => {
-    req.logOut(
-        function (err) {
-            if (err) {
-                return next(err);
-            }
-        })
-    res.redirect('/login')
+    if (req.user.type === "sales") {
+        req.logOut(
+            function (err) {
+                if (err) {
+                    return next(err);
+                }
+            })
+        return res.redirect('/saleslogin')
+    }
+    if (req.user.type === "engineer") {
+        req.logOut(
+            function (err) {
+                if (err) {
+                    return next(err);
+                }
+            })
+        return res.redirect('/englogin')} 
 })
 
 app.post('/getproject', checkauthenticated, async (req, res) => {
@@ -139,15 +149,31 @@ app.post('/pdescriptionchange', checkauthenticated, async (req, res) => {
     }
 })
 
+app.get('/eng',checkauthenticated,(req,res)=>{
+    res.render('engindex.ejs',{ name: req.user.name })
+})
+
+app.get('/englogin',checknotauthenticated,(req,res)=>{
+    res.render('login_eng.ejs')
+})
+
+app.post('/englogin', checknotauthenticated,passport.authenticate('eng',{
+    successRedirect: '/eng',
+    failureRedirect: '/englogin',
+    failureFlash: true
+}))
+
 function checkauthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next()
     }
-    res.redirect('/login')
+    if (req.user.type === "sales") {return res.redirect('/saleslogin')}
+    if (req.user.type === "engineer") {return res.redirect('/englogin')} 
 }
 function checknotauthenticated(req, res, next) {
     if (req.isAuthenticated()) {
-        return res.redirect('/')
+        if (req.user.type === "sales") {return res.redirect('/')}
+        if (req.user.type === "engineer") {return res.redirect('/eng')} 
     }
     next()
 }
