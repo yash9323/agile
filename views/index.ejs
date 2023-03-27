@@ -5,7 +5,7 @@
 
 <body class="boddy">
     <div class="header">
-        <h1>Welcome <%= name %>
+        <h1>Welcome <%= name.toUpperCase() %>
         </h1>
         <form action="/logout?_method=DELETE" method="POST">
             <button type="submit">Log out</button>
