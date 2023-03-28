@@ -113,6 +113,14 @@ app.post('/getproject', checkauthenticated, async (req, res) => {
     res.render('view_project.ejs', d)
 })
 
+app.post('/getprojecteng', checkauthenticated, async (req, res) => {
+    let d = await get_project(req.body.id)
+    const user = users.find(user => user._id.toString() === d.customer)
+    d.customerName = user.name;
+    d.customerEmail = user.email
+    res.render('view_project_eng.ejs', d)
+})
+
 app.get("/newproject", checkauthenticated, (req, res) => {
     res.render("new_project.ejs")
 })
@@ -146,6 +154,13 @@ app.post('/pdescriptionchange', checkauthenticated, async (req, res) => {
     let a = await descriptionchange(req.body.id,req.body.description)
     if (a !== null){
         res.redirect("/")
+    }
+})
+
+app.post('/pdescriptionchangeeng', checkauthenticated, async (req, res) => {
+    let a = await descriptionchange(req.body.id,req.body.description)
+    if (a !== null){
+        res.redirect("/eng")
     }
 })
 
