@@ -38,6 +38,20 @@ initializepassport(
     id => users.find(user => user.id === id)
 )
 
+app.get("/mlogin",checknotauthenticated,(req,res)=>{
+    res.render("login_manager.ejs")
+})
+
+app.post('/managerlogin', checknotauthenticated,passport.authenticate('manager',{
+    successRedirect: '/manager',
+    failureRedirect: '/login',
+    failureFlash: true
+}))
+
+app.get('/manager',checkauthenticated,(req,res)=>{
+    res.render('managerindex.ejs', { name: req.user.name })
+})
+
 app.get('/', checkauthenticated, (req, res) => {
     res.render('salesindex.ejs', { name: req.user.name })
 })
@@ -103,6 +117,14 @@ app.delete('/logout', (req, res) => {
                 }
             })
         return res.redirect('/englogin')} 
+    if (req.user.type === "manager") {
+        req.logOut(
+            function (err) {
+                if (err) {
+                    return next(err);
+                }
+            })
+        return res.redirect('/mlogin')} 
 })
 
 app.post('/getproject', checkauthenticated, async (req, res) => {
