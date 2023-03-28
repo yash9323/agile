@@ -1,55 +1,63 @@
 [{
   "_id": {
-    "$oid": "6404fd6d92853967e8c78323"
+    "$oid": "64234c5399eab4e3d3ed542a"
   },
   "id": 13.127591071439415,
   "name": "sales member 1",
   "email": "sales1@solar.com",
   "password": "$2b$10$gIyjvF3yfQtkt0SpL1.EnOt0ovHiSSp2Aaz7dKs7hYHlwNM3.otwy",
+  "pwd_text": "sales1",
   "type": "sales"
 },{
   "_id": {
-    "$oid": "6404fd6d92853967e8c78324"
+    "$oid": "64234c5399eab4e3d3ed542b"
   },
   "id": 64.10064100905456,
   "name": "sales member 2",
   "email": "sales2@solar.com",
   "password": "$2b$10$.tv8Pdla5CZamRwuSNz2dOop9K01.JjcEc3H4DNQ9aOm5/LGtKZJK",
+  "pwd_text": "sales2",
   "type": "sales"
 },{
   "_id": {
-    "$oid": "64065fc5cb1dadc8f243a7f5"
+    "$oid": "64234c5399eab4e3d3ed542c"
   },
-  "id": 15.769900552939987,
+  "id": 35.76113358972557,
   "name": "Daksh",
-  "email": "daksh95@gmail.com",
-  "password": "$2b$10$tfOEXSsGbsZFzbINyMeELOMhtbtTh0WMDAJcJvfjwZ3r5b2NYg.Y.",
+  "email": "daksh@solar.com",
+  "password": "$2b$10$PYy2GdZK7Z9TqLB3aUs9Lu3Ns071.7VBRcXt/3W2spZIwlzjPDWh2",
+  "pwd_text": "12345678",
   "type": "engineer"
 },{
   "_id": {
-    "$oid": "640662bffb5bcdd8be16eeec"
+    "$oid": "64234c5399eab4e3d3ed542d"
   },
-  "id": 29.42904313493695,
-  "name": "Yash",
-  "email": "ybhut@solar.com",
-  "password": "$2b$10$pZhxsEgFCsrkCC5DKK1j7e4C/nGMhC2FDvbqnPO6sl/HiJ318MPxG",
-  "type": "customer"
-},{
-  "_id": {
-    "$oid": "640662d6fb5bcdd8be16eeed"
-  },
-  "id": 19.387870100458816,
-  "name": "Atul",
-  "email": "atulgupta@solar.com",
-  "password": "$2b$10$ie.0dAv.faAvwv7TqNpaneaUeptVf2feuY.WSPTrV3cJhfR.1vm3.",
+  "id": 17.071864332182287,
+  "name": "Atul Gupta",
+  "email": "atul@solar.com",
+  "password": "$2b$10$bLw0bOTmRDbCY4wJPUNjJ.UYmis9s3ezNNbJsaxvp4s1w8RCmoBum",
+  "pwd_text": "12345678",
   "type": "manager"
 },{
   "_id": {
-    "$oid": "64067870e6214c945ca16aa4"
+    "$oid": "64234c5399eab4e3d3ed542e"
   },
-  "id": 58.93412170771939,
-  "name": "Shrey",
+  "id": 4.593411873522224,
+  "name": "Shrey Tanna",
   "email": "shrey@solar.com",
-  "password": "$2b$10$pgAxSwDGNHLIxBGv55qcVOG9VVml6pt2jLxYFz/W0VNPslYeXaEsG",
+  "password": "$2b$10$.lxHayKt4i.A1M0r6CEB9.1o62orY1CLIqaSISx5DG9yvnb/oxhg.",
+  "pwd_text": "12345678",
+  "phone": "3476350094",
+  "type": "customer"
+},{
+  "_id": {
+    "$oid": "64234c5399eab4e3d3ed542f"
+  },
+  "id": 10.477316131901858,
+  "name": "Riddhi Dange",
+  "email": "riddhi@solar.com",
+  "password": "$2b$10$8debIwXEdFiUa/4Gjl77L.oAKCJdhJKk9i7rqpAkdtyvZbPyLVb2q",
+  "pwd_text": "12345678",
+  "phone": "3476350094",
   "type": "customer"
 }]

@@ -110,6 +110,7 @@ app.post('/getproject', checkauthenticated, async (req, res) => {
     const user = users.find(user => user._id.toString() === d.customer)
     d.customerName = user.name;
     d.customerEmail = user.email
+    d.phone = user.phone
     res.render('view_project.ejs', d)
 })
 
@@ -118,6 +119,7 @@ app.post('/getprojecteng', checkauthenticated, async (req, res) => {
     const user = users.find(user => user._id.toString() === d.customer)
     d.customerName = user.name;
     d.customerEmail = user.email
+    d.phone = user.phone
     res.render('view_project_eng.ejs', d)
 })
 
@@ -177,6 +179,8 @@ app.post('/englogin', checknotauthenticated,passport.authenticate('eng',{
     failureRedirect: '/englogin',
     failureFlash: true
 }))
+
+
 
 function checkauthenticated(req, res, next) {
     if (req.isAuthenticated()) {

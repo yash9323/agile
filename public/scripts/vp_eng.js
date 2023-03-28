@@ -34,4 +34,3 @@ function displaydescription(){
         n.style.display = "none"
     }
 }
-

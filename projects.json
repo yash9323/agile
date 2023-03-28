@@ -1,18 +1,41 @@
 [{
   "_id": {
-    "$oid": "63f8521309238c3d2f432596"
+    "$oid": "64234c5399eab4e3d3ed5430"
   },
-  "name": "yash",
-  "customer": "640662bffb5bcdd8be16eeec",
-  "description": "yoyo",
-  "address": "lakjsdfhkas",
-  "status": "asdkfjashdlfkja"
+  "name": "Second Solar Project",
+  "customer": "64234c5399eab4e3d3ed542e",
+  "description": "This is another test",
+  "status": "Engineering",
+  "propertyAddress": "76 Columbia Ave, Jersey City, NJ 07307",
+  "projectSize": 0
 },{
   "_id": {
-    "$oid": "640680667214deec243c0dda"
+    "$oid": "64234c5399eab4e3d3ed5431"
   },
   "name": "My First Solar Project",
   "description": "This is a test solar project",
-  "customer": "640662bffb5bcdd8be16eeec",
+  "customer": "64234c5399eab4e3d3ed542f",
+  "propertyAddress": "225 South St, Jersey City, NJ 07307",
+  "projectSize": 50,
   "status": "Pending"
+},{
+  "_id": {
+    "$oid": "64234c5399eab4e3d3ed5432"
+  },
+  "name": "Random Project II",
+  "description": "This is another random project",
+  "customer": "64234c5399eab4e3d3ed542e",
+  "propertyAddress": "20 River Ct, Jersey City, NJ 07310",
+  "projectSize": 100,
+  "status": "Started"
+},{
+  "_id": {
+    "$oid": "64234c5399eab4e3d3ed5433"
+  },
+  "name": "Test Project Engineering",
+  "description": "Test",
+  "customer": "64234c5399eab4e3d3ed542f",
+  "propertyAddress": "28 Terrace Ave, Jersey City, NJ 07307",
+  "projectSize": 200,
+  "status": "Engineering"
 }]

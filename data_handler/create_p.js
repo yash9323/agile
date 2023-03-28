@@ -4,7 +4,7 @@ import projects from '../config/mongoCollections.js';
 import users from './users.js'
 
 export default async function main(ob){
-    console.log(ob)
+    // console.log(ob)
     const db = await dbConnection();
     const projectcollection = await projects()
     let project = await projectcollection.insertOne(ob);
