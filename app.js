@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import bcrypt from 'bcrypt';
 import passport from 'passport';
+import multer from 'multer';
 import flash from 'express-flash';
 import session from 'express-session';
 import methodoverride from 'method-override';
@@ -16,9 +17,31 @@ import delete_project from './data_handler/delete_p.js';
 import namechange from './data_handler/changen_p.js';
 import statuschange from './data_handler/changes_p.js';
 import descriptionchange from './data_handler/changed_p.js';
+import uploadpictures from './data_handler/upload_picture.js';
+
 
 dotenv.config();
+
+const multerStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/')
+    },
+    filename: (req, file, cb) => {
+        const ext = file.mimetype.split("/")[1];
+        cb(null, `${file.fieldname}-${Date.now()}.${ext}`)
+    }
+});
+
+const multerFilter = (req, file, cb) => {
+    const fileTypes = ['jpg', 'jpeg', 'png'];
+    const currFiletype = file.mimetype.split('/')[1];
+    if (fileTypes.includes(currFiletype)) cb(null, true);
+    else cb(new Error('Please upload only a JPG or PNG file'), false);
+};
+
 const app = express();
+const upload = multer( {storage: multerStorage, fileFilter: multerFilter });
+
 app.set('view-engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
 app.use(flash());
@@ -28,7 +51,7 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
-}))
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -133,6 +156,7 @@ app.post('/getproject', checkauthenticated, async (req, res) => {
     d.customerName = user.name;
     d.customerEmail = user.email
     d.phone = user.phone
+    d.images = user.images
     res.render('view_project.ejs', d)
 })
 
@@ -188,6 +212,15 @@ app.post('/pdescriptionchangeeng', checkauthenticated, async (req, res) => {
     }
 })
 
+app.post('/uploadpictures', checkauthenticated, upload.array('projectUpdate'), async (req, res) => {
+    const fileArr = req.files.map((file) => file.path);
+    const projectId = req.body.projectid;
+    let a = await uploadpictures(projectId, fileArr);
+    if (a !== null) {
+        res.redirect()
+    }
+})
+
 app.get('/eng',checkauthenticated,(req,res)=>{
     res.render('engindex.ejs',{ name: req.user.name })
 })
@@ -201,8 +234,6 @@ app.post('/englogin', checknotauthenticated,passport.authenticate('eng',{
     failureRedirect: '/englogin',
     failureFlash: true
 }))
-
-
 
 function checkauthenticated(req, res, next) {
     if (req.isAuthenticated()) {
